@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<section class="grid">
+  <aside class="sidebar">
+    <div class="profile">
+      <h3>{{ user.get_short_name|default:user.username }}</h3>
+      <p class="muted">{{ user.email }}</p>
+    </div>
+    <div class="tabs">
+      <a href="{% url 'tasks:task_list' %}?status=all" class="tab">All Tasks</a>
+      <a href="{% url 'tasks:task_list' %}?status=pending" class="tab">Pending</a>
+      <a href="{% url 'tasks:task_list' %}?status=completed" class="tab">Completed</a>
+      <a href="{% url 'tasks:task_list' %}?priority=H" class="tab">High Priority</a>
+      <a href="{% url 'tasks:task_list' %}?status=overdue" class="tab">Overdue</a>
+    </div>
+  </aside>
+
+  <div class="content">
+    <div class="stats">
+      <div class="stat">
+        <h2>{{ total }}</h2>
+        <p>Total</p>
+      </div>
+      <div class="stat">
+        <h2>{{ pending }}</h2>
+        <p>Pending</p>
+      </div>
+      <div class="stat">
+        <h2>{{ completed }}</h2>
+        <p>Completed</p>
+      </div>
+      <div class="stat">
+        <h2>{{ overdue }}</h2>
+        <p>Overdue</p>
+      </div>
+    </div>
+
+    <div class="welcome-card">
+      <h3>Welcome back!</h3>
+      <p>Quick actions: <a href="{% url 'tasks:task_create' %}">Create task</a> • <a href="{% url 'tasks:task_list' %}">View tasks</a></p>
+    </div>
+  </div>
+</section>
+{% endblock %}

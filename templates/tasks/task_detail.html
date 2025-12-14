@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}{{ task.title }}{% endblock %}
+{% block content %}
+<div class="detail-card">
+  <h2>{{ task.title }}</h2>
+  <p class="muted">{{ task.description }}</p>
+  <div class="meta">
+    <p>Priority: {{ task.get_priority_display }}</p>
+    <p>Due: {{ task.due_date|default:'—' }}</p>
+    <p>Completed: {{ task.completed }}</p>
+  </div>
+  <div class="actions">
+    <a class="btn" href="{% url 'tasks:task_edit' task.pk %}">Edit</a>
+    <a class="btn ghost" href="{% url 'tasks:task_list' %}">Back</a>
+  </div>
+</div>
+{% endblock %}
